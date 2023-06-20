@@ -1,8 +1,8 @@
-package com.hugo.VideoFlix.service
+package com.hugo.videoFlix.service
 
-import com.hugo.VideoFlix.exception.NotFoundException
-import com.hugo.VideoFlix.model.Video
-import com.hugo.VideoFlix.repository.VideoRepository
+import com.hugo.videoFlix.exception.NotFoundException
+import com.hugo.videoFlix.model.Video
+import com.hugo.videoFlix.repository.VideoRepository
 import org.springframework.stereotype.Service
 
 

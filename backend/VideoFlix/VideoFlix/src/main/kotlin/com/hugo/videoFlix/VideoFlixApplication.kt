@@ -1,4 +1,4 @@
-package com.hugo.VideoFlix
+package com.hugo.videoFlix
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

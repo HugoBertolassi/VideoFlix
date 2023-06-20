@@ -1,4 +1,4 @@
-package com.hugo.VideoFlix.model
+package com.hugo.videoFlix.model
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
