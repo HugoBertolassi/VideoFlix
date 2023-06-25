@@ -1,0 +1,1 @@
+insert into categoria(id, titulo, cor) values (1, 'LIVRE','#ffffff');
