@@ -9,8 +9,8 @@ import jakarta.persistence.Id
 data class Video (
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id :Long? = null,
-        val titulo : String,
-        val descricao :String,
-        val url:String,
+        var titulo : String,
+        var descricao :String,
+        var url:String,
         val ativo:Long = 1
 )
