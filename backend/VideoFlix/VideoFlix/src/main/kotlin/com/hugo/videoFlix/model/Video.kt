@@ -1,9 +1,6 @@
 package com.hugo.videoFlix.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 data class Video (
@@ -12,5 +9,7 @@ data class Video (
         var titulo : String,
         var descricao :String,
         var url:String,
-        val ativo:Long = 1
+        val ativo:Long = 1,
+        @ManyToOne
+        var categoria:Categoria
 )

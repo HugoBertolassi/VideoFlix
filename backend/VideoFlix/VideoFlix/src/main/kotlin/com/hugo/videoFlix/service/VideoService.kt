@@ -19,7 +19,7 @@ class VideoService(
     }
 
     fun getById(id:Long):Video{
-        println(id)
+        //println(id)
         return videoRepository.findById(id).orElseThrow{
             val notFoundMessage:String = "Video não encontrado"
             NotFoundException(notFoundMessage)

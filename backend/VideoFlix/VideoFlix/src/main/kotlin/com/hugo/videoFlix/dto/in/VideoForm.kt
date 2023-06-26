@@ -14,7 +14,9 @@ data class VideoForm  (
     val descricao: String,
     @field:NotEmpty
     @field:Pattern(regexp ="^(([-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*))|(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&\\\\=]*)))\$")
-    val url: String
+    val url: String,
+    @field:NotNull
+    val categoriaId:Long
 )
 
 data class VideoFormUpdate  (
