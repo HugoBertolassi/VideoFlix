@@ -32,6 +32,11 @@ class CategoriaController(
 
     }
 
+    @GetMapping("/{id}/videos")
+    fun getVideosByIdCategoria(@PathVariable id:Long):List<Video>?{
+        return categoriasService.getVideosByIdCategoria(id)
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional

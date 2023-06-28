@@ -9,12 +9,14 @@ import com.hugo.videoFlix.mapper.CategoriaFormMapper
 import com.hugo.videoFlix.model.Categoria
 import com.hugo.videoFlix.model.Video
 import com.hugo.videoFlix.repository.CategoriaRepository
+import com.hugo.videoFlix.repository.VideoRepository
 import org.springframework.stereotype.Service
 
 @Service
 class CategoriasService(
        private val categoriaRepository: CategoriaRepository,
-       private val categoriaFormMapper: CategoriaFormMapper
+       private val categoriaFormMapper: CategoriaFormMapper,
+       private val videoRepository: VideoRepository
 
 ) {
     fun listar(): List<Categoria> {
@@ -51,5 +53,16 @@ class CategoriasService(
             return true
         }
         return false
+    }
+
+    fun getVideosByIdCategoria(id: Long):List<Video>? {
+        var videos:List<Video> = listOf()
+        val notFoundMessage:String = "Videos não encontrados nesta categoria"
+        if(categoriaRepository.existsById(id)){
+            videos=videoRepository.findByCategoriaId(id)
+                    //.orElseThrow{NotFoundException(notFoundMessage)}
+
+        }
+        return videos
     }
 }

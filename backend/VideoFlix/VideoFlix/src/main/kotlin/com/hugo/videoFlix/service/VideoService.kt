@@ -14,8 +14,21 @@ class VideoService(
         private val videoRepository: VideoRepository,
         private val videoFormMapper: VideoFormMapper
 ){
-    fun listar():List<Video> {
-        return videoRepository.findAll()
+    fun listar(
+            titulo:String?
+    ):List<Video> {
+        val videos = if(titulo == null){
+            videoRepository.findAll()
+        }
+        else{
+            //videoRepository.findByTitulo(titulo) //traz nome exato
+            //videoRepository.findAllTitulo(titulo)
+            //videoRepository.findByTextContaining(titulo)
+            videoRepository.findByTituloContaining(titulo)
+        }
+
+
+        return videos
     }
 
     fun getById(id:Long):Video{

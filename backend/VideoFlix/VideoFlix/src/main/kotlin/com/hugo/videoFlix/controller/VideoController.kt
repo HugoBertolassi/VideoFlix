@@ -17,8 +17,10 @@ class VideoController(
         private val videoService:VideoService
 ) {
     @GetMapping
-    fun listar():List<Video>{
-        return videoService.listar()
+    fun listar(
+            @RequestParam(required = false) titulo:String?,
+    ):List<Video>{
+        return videoService.listar(titulo)
     }
 
     @GetMapping("/{id}")
