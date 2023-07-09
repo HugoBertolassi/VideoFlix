@@ -11,8 +11,8 @@ class AuthenticationService(
 ):UserDetailsService {
     override fun loadUserByUsername(email: String?): UserDetails {
         val usuario= usuarioRepository.findByEmail(email) ?: throw RuntimeException()
-        println(usuario.email)
-        println(usuario.role)
+        //println(usuario.email)
+        //println(usuario.role)
         return UserDetailService(usuario)
     }
 }

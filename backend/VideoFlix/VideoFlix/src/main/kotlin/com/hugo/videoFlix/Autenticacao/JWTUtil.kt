@@ -1,15 +1,19 @@
 package com.hugo.videoFlix.Autenticacao
 
+import io.jsonwebtoken.Jwt
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.stereotype.Component
 import java.util.*
 
 
 @Component
-class JWTUtil(){
+class JWTUtil(
+        private val authenticationService:AuthenticationService
+){
     private val expiration=60000 //1min
     @Value("\${jwt.secret}")//pega o valor do yml  que define o valor do segredo da chave do yml
     private lateinit var  secret:String//lateInitapenas carrega a variavel quando gerar
@@ -31,7 +35,14 @@ class JWTUtil(){
                 .setExpiration(Date(System.currentTimeMillis()+ expiration))
                 .signWith(SignatureAlgorithm.HS512,secret.toByteArray())
                 .compact()
-        println("autoridade: ${auth}")
         return auth
+    }
+
+    fun getSubject(token: String): String {
+        return  Jwts.parser()
+                .setSigningKey(secret.toByteArray())
+                .parseClaimsJws(token).body.subject
+
+
     }
 }

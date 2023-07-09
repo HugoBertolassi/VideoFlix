@@ -19,7 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class SecurityConfiguration (
         private val configuration: AuthenticationConfiguration,
-        private val jwtUtil: JWTUtil
+        private val jwtUtil: JWTUtil,
+        private val autenticacaoFilter:AutenticacaoFilter
+
 ){
     @Bean
     fun authenticationManager(authenticationConfiguration: AuthenticationConfiguration):AuthenticationManager{
@@ -30,21 +32,25 @@ class SecurityConfiguration (
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
+
+
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
                 .csrf { csrf -> csrf.disable() }   ///remoção do controle de csrf, Verificar como adicionar essa etapa, sem ela bloqueava o post
                 .authorizeHttpRequests(Customizer {auth->
                     auth
-                            .requestMatchers("/login").permitAll()
-                            .requestMatchers("/videos","/videos/**")
-                                .hasAuthority("LEITURA_ESCRITA")
+                            .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                            .requestMatchers("/videos","/videos/**").hasAuthority("LEITURA_ESCRITA")
+
                             .anyRequest().authenticated()
                 })
+                .addFilterBefore(autenticacaoFilter,UsernamePasswordAuthenticationFilter().javaClass)
                 .sessionManagement(Customizer{session->
                     session.
                     sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 })
+
 
         return http.build()
     }
