@@ -6,6 +6,8 @@ import com.hugo.videoFlix.exception.NotFoundException
 import com.hugo.videoFlix.mapper.VideoFormMapper
 import com.hugo.videoFlix.model.Video
 import com.hugo.videoFlix.repository.VideoRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 
@@ -15,16 +17,17 @@ class VideoService(
         private val videoFormMapper: VideoFormMapper
 ){
     fun listar(
-            titulo:String?
-    ):List<Video> {
+            titulo: String?,
+            paginacao: Pageable
+    ): Page<Video> {
         val videos = if(titulo == null){
-            videoRepository.findAll()
+            videoRepository.findAll(paginacao)
         }
         else{
             //videoRepository.findByTitulo(titulo) //traz nome exato
             //videoRepository.findAllTitulo(titulo)
             //videoRepository.findByTextContaining(titulo)
-            videoRepository.findByTituloContaining(titulo)
+            videoRepository.findByTituloContaining(titulo,paginacao)
         }
 
 

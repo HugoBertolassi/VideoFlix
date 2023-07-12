@@ -1,6 +1,8 @@
 package com.hugo.videoFlix.repository
 
 import com.hugo.videoFlix.model.Video
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -22,5 +24,6 @@ interface VideoRepository: JpaRepository<Video, Long> {
 
     fun findByTituloContaining(titulo:String):List<Video>
     fun findByCategoriaId(id: Long): List<Video>
+    fun findByTituloContaining(titulo: String, paginacao: Pageable): Page<Video>
 
 }
